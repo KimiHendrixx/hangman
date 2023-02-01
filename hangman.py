@@ -68,9 +68,3 @@ def hangman():
     
     return random_word
 
-
-#things to fix
-# word was hapless and it showed that I guessed it correct and i had to type in s twice but the word list just continued to  ['h', 'a', 'p', 'l', 'e', 's', '']
-# appends s on the lowest possible index also ersetzt das schon vorhandene s einfach durch das neue s 
-
-hangman()
