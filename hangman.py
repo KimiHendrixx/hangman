@@ -73,12 +73,18 @@ def hangman():
             print("\nDisplay chart: ", guess_string, "\n\n")
             print(f"\n\nYou have {guesses_count} guesses left\n----------------------------------")
 
+
+    #END OF WHILE LOOP -> CHECK OUT TIME
+
+    #CHECK OUT WINNING
     if guess_string == random_word:
         print(f"\nNice Job! The word was:  {random_word}")
     
+    #CHECK OUT LOOSING
     elif guesses_count == 0:
         print(f"Sorry, you ran out of guesses!\n The word was {random_word}")
 
     
     return random_word
+
 
