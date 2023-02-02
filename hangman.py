@@ -23,14 +23,19 @@ def hangman():
     #EMPTY LIST OF WORD LENGTH TO BE FILLED IN BY THE USER
     for letter in random_word:
         guess_list.append(" - ")
-    print(random_word)
+    guess_string = "".join(guess_list)
 
     #USED LETTERS WITH ACCOUNT TO DOUBLE LETTERS
     used_letters = []
-    
+
+    #GUESSES COUNT
+    guesses_count = word_length + 10
+    print(f"\n\nAlright let's go you have {guesses_count} guesses!\n----------------------------------")
+
     #USER GUESSES
-    while correct_count < word_length:
-        user_guess = input("\nGuess a letter>>>  ").lower()
+    while correct_count < word_length and guesses_count > 0:
+        user_guess = input("Guess a letter>>>  ").lower()
+        guesses_count -= 1
     
         #CORRECT GUESS
         if user_guess in word_list and alphabet:
@@ -40,30 +45,39 @@ def hangman():
             word_list[index] = "-" #canceling out correct user_guess of the word list
             guess_list[index] = user_guess #adding correct user_guess to the displayed list
             guess_string = "".join(guess_list) #displaying the list as a nice word
+            print("####### Nice job #######")
             print("\nDisplay chart: ", guess_string, "\n")
+            print(f"\n\nYou have {guesses_count} guesses left\n----------------------------------")
 
         #NOT IN THE WORD
         elif user_guess not in random_word and user_guess in alphabet: 
-            print("---Not in the word!---")
-            print("\nDisplay chart: ", guess_string, "\n")
+            print("####### Not in the word! #######")
+            print("\nDisplay chart: ", guess_string, "\n\n")
+            print(f"\n\nYou have {guesses_count} guesses left\n----------------------------------")
 
         #ALREADY USED LETTER AND NOT MULTIPLE TIMES IN WORD
         elif user_guess in used_letters and user_guess in alphabet:
-            print("---You have already used this letter sufficiently!---")
-            print("\nDisplay chart: ", guess_string, "\n")
+            print("####### You have already used this letter sufficiently! #######")
+            print("\nDisplay chart: ", guess_string, "\n\n")
+            print(f"\n\nYou have {guesses_count} guesses left\n----------------------------------")
 
         #NOT IN THE ALPHABET
         elif user_guess not in alphabet:
-            print("---Not in the alphabet!---")
-            print("\nDisplay chart: ", guess_string, "\n")
+            print("####### Not in the alphabet! #######")
+            print("\nDisplay chart: ", guess_string, "\n\n")
+            print(f"\n\nYou have {guesses_count} guesses left\n----------------------------------")
         
         #UNKNOWN ERROR
         else:
-            print("---Error---")
-            print("\nDisplay chart: ", guess_string, "\n")
+            print("####### Error #######")
+            print("\nDisplay chart: ", guess_string, "\n\n")
+            print(f"\n\nYou have {guesses_count} guesses left\n----------------------------------")
 
     if guess_string == random_word:
         print(f"\nNice Job! The word was:  {random_word}")
+    
+    elif guesses_count == 0:
+        print(f"Sorry, you ran out of guesses!\n The word was {random_word}")
 
     
     return random_word
